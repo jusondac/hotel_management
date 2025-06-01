@@ -296,7 +296,7 @@
                     <div>
                       <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Recent Bookings</dt>
                       <dd class="space-y-2">
-                        <% customer.bookings.recent.limit(3).each do |booking| %>
+                        <% customer.bookings.first(3).each do |booking| %>
                           <div class="p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
                             <div class="text-sm font-medium text-gray-900 dark:text-white">
                               Booking #<%= booking.id %>

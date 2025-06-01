@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   root "home#index"
   get "reservations/new", to: "bookings#new_reservation", as: "new_reservation"
   post "reservations", to: "bookings#create_reservation", as: "reservations"
-  get "registrations/new"
   resource :session
   resource :registration, only: %i[new create]
   resources :passwords, param: :token

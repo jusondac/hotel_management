@@ -1,33 +1,35 @@
 <% content_for :title, "Rooms" %>
-<div class="max-w-7xl mx-auto px-4 py-8">
-  <!-- Header -->
-  <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 mb-8">
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+<div class="p-4 bg-gray-50 dark:bg-gray-900 min-h-screen">
+  <!-- Header Section -->
+  <div class="mb-8">
+    <!-- Breadcrumb -->
+    <nav class="flex mb-4" aria-label="Breadcrumb">
+      <ol class="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
+        <li class="inline-flex items-center">
+          <%= link_to root_path, class: "inline-flex items-center text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-white" do %>
+            <svg class="w-5 h-5 mr-2.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+            </svg>
+            Home
+          <% end %>
+        </li>
+        <li>
+          <div class="flex items-center">
+            <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="ml-1 text-gray-400 md:ml-2 dark:text-gray-500" aria-current="page">Rooms</span>
+          </div>
+        </li>
+      </ol>
+    </nav>
+    <!-- Title and Actions -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
       <div>
-        <nav class="flex mb-3" aria-label="Breadcrumb">
-          <ol class="inline-flex items-center space-x-1 text-sm font-medium">
-            <li class="inline-flex items-center">
-              <%= link_to root_path, class: "inline-flex items-center text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white" do %>
-                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
-                </svg>
-                Home
-              <% end %>
-            </li>
-            <li>
-              <div class="flex items-center">
-                <svg class="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-                </svg>
-                <span class="ml-1 text-gray-500 dark:text-gray-400">Rooms</span>
-              </div>
-            </li>
-          </ol>
-        </nav>
         <h1 class="text-3xl font-bold text-gray-900 dark:text-white">Rooms</h1>
         <p class="mt-2 text-gray-600 dark:text-gray-400">Manage your hotel rooms and availability</p>
       </div>
-      <div class="flex flex-col sm:flex-row gap-3">
+      <div class="mt-4 sm:mt-0 flex gap-3">
         <%= search_form_for @q, html: { class: "flex gap-2" } do |f| %>
           <div class="relative">
             <%= f.search_field :name_cont, class: "pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white", placeholder: "Search rooms..." %>
@@ -38,9 +40,9 @@
             </div>
           </div>
         <% end %>
-        <button data-modal-target="room-modal" data-modal-toggle="room-modal" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-          <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+        <button data-modal-target="room-modal" data-modal-toggle="room-modal" class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-lg shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+          <svg class="w-5 h-5 mr-2 -ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
           </svg>
           Add Room
         </button>
@@ -49,42 +51,60 @@
   </div>
   <!-- Stats -->
   <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
-    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-      <div class="flex items-center">
-        <div class="p-2 bg-blue-100 dark:bg-blue-900 rounded-lg">
-          <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-          </svg>
-        </div>
-        <div class="ml-4">
-          <p class="text-2xl font-semibold text-gray-900 dark:text-white"><%= @rooms.count %></p>
-          <p class="text-gray-600 dark:text-gray-400">Total Rooms</p>
-        </div>
-      </div>
-    </div>
-    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-      <div class="flex items-center">
-        <div class="p-2 bg-green-100 dark:bg-green-900 rounded-lg">
-          <svg class="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
-        </div>
-        <div class="ml-4">
-          <p class="text-2xl font-semibold text-gray-900 dark:text-white"><%= @rooms.select(&:available?).count %></p>
-          <p class="text-gray-600 dark:text-gray-400">Available</p>
+    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg">
+      <div class="p-5">
+        <div class="flex items-center">
+          <div class="flex-shrink-0">
+            <div class="p-3 bg-blue-100 dark:bg-blue-900 rounded-full">
+              <svg class="w-6 h-6 text-blue-600 dark:text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="ml-5 w-0 flex-1">
+            <dl>
+              <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Total Rooms</dt>
+              <dd class="text-3xl font-bold text-gray-900 dark:text-white"><%= @rooms.count %></dd>
+            </dl>
+          </div>
         </div>
       </div>
     </div>
-    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-      <div class="flex items-center">
-        <div class="p-2 bg-red-100 dark:bg-red-900 rounded-lg">
-          <svg class="w-6 h-6 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-          </svg>
+    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg">
+      <div class="p-5">
+        <div class="flex items-center">
+          <div class="flex-shrink-0">
+            <div class="p-3 bg-green-100 dark:bg-green-900 rounded-full">
+              <svg class="w-6 h-6 text-green-600 dark:text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="ml-5 w-0 flex-1">
+            <dl>
+              <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Available</dt>
+              <dd class="text-3xl font-bold text-gray-900 dark:text-white"><%= @rooms.select(&:available?).count %></dd>
+            </dl>
+          </div>
         </div>
-        <div class="ml-4">
-          <p class="text-2xl font-semibold text-gray-900 dark:text-white"><%= @rooms.reject(&:available?).count %></p>
-          <p class="text-gray-600 dark:text-gray-400">Occupied</p>
+      </div>
+    </div>
+    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow rounded-lg">
+      <div class="p-5">
+        <div class="flex items-center">
+          <div class="flex-shrink-0">
+            <div class="p-3 bg-red-100 dark:bg-red-900 rounded-full">
+              <svg class="w-6 h-6 text-red-600 dark:text-red-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="ml-5 w-0 flex-1">
+            <dl>
+              <dt class="text-sm font-medium text-gray-500 dark:text-gray-400 truncate">Occupied</dt>
+              <dd class="text-3xl font-bold text-gray-900 dark:text-white"><%= @rooms.reject(&:available?).count %></dd>
+            </dl>
+          </div>
         </div>
       </div>
     </div>
@@ -212,12 +232,7 @@
       </div>
     <% end %>
   </div>
-  <!-- Pagination -->
-  <% if respond_to?(:pagy_nav) %>
-    <div class="mt-8 flex justify-center">
-      <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
-    </div>
-  <% end %>
+  <%= render 'shared/pagination', pagy: @pagy %>
 </div>
 <!-- Add Room Modal -->
 <div id="room-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full bg-gray-900/50">
@@ -253,5 +268,8 @@
       </div>
     </div>
   </div>
+  <!-- Pagination -->
+  <div class="mt-8">
+    <%= render 'shared/pagination', pagy: @pagy %>
+  </div>
 </div>
-<%= render 'shared/pagination', pagy: @pagy %>

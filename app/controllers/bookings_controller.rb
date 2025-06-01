@@ -52,27 +52,27 @@ class BookingsController < ApplicationController
     @booking = Booking.new
     @customer = Customer.new
     @room_types = RoomType.all
-    
+
     # Build rooms query with filters
     @rooms = Room.available.includes(:room_type, :facilities)
-    
+
     # Filter by room type if specified
     if params[:room_type_id].present?
       @rooms = @rooms.where(room_type_id: params[:room_type_id])
     end
-    
+
     # Filter by price range if specified
     if params[:min_price].present?
-      @rooms = @rooms.where('price >= ?', params[:min_price])
+      @rooms = @rooms.where("price >= ?", params[:min_price])
     end
-    
+
     if params[:max_price].present?
-      @rooms = @rooms.where('price <= ?', params[:max_price])
+      @rooms = @rooms.where("price <= ?", params[:max_price])
     end
-    
+
     # Convert to array for date filtering if needed
     rooms_array = @rooms.to_a
-    
+
     # Filter by availability for specific dates if provided
     if params[:start_date].present? && params[:end_date].present?
       begin
@@ -83,7 +83,7 @@ class BookingsController < ApplicationController
         # Invalid date format, ignore date filter
       end
     end
-    
+
     @rooms = rooms_array
   end
 
@@ -146,27 +146,27 @@ class BookingsController < ApplicationController
 
     def load_reservation_data
       @room_types = RoomType.all
-      
+
       # Build rooms query with filters
       @rooms = Room.available.includes(:room_type, :facilities)
-      
+
       # Filter by room type if specified
       if params[:room_type_id].present?
         @rooms = @rooms.where(room_type_id: params[:room_type_id])
       end
-      
+
       # Filter by price range if specified
       if params[:min_price].present?
-        @rooms = @rooms.where('price >= ?', params[:min_price])
+        @rooms = @rooms.where("price >= ?", params[:min_price])
       end
-      
+
       if params[:max_price].present?
-        @rooms = @rooms.where('price <= ?', params[:max_price])
+        @rooms = @rooms.where("price <= ?", params[:max_price])
       end
-      
+
       # Convert to array for date filtering if needed
       rooms_array = @rooms.to_a
-      
+
       # Filter by availability for specific dates if provided
       if params[:start_date].present? && params[:end_date].present?
         begin
@@ -177,7 +177,7 @@ class BookingsController < ApplicationController
           # Invalid date format, ignore date filter
         end
       end
-      
+
       @rooms = rooms_array
     end
 end
