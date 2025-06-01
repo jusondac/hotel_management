@@ -1,0 +1,33 @@
+<%= form_with(model: customer, class: "contents text-white flex flex-col gap-5 mt-4" ) do |form| %>
+  <% if customer.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(customer.errors.count, "error") %> prohibited this customer from being saved:</h2>
+
+      <ul>
+        <% customer.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.text_field :email, placeholder: "email", class: ["block shadow-sm rounded-md border bg-gray-700 px-3 py-2 mt-2 w-full", {"border-gray-600 focus:outline-blue-600": customer.errors[:email].none?, "border-red-400 focus:outline-red-600": customer.errors[:email].any?}] %>
+  </div>
+
+  <div>
+    <%= form.text_field :full_name, placeholder: "full_name", class: ["block shadow-sm rounded-md border bg-gray-700 px-3 py-2 mt-2 w-full", {"border-gray-600 focus:outline-blue-600": customer.errors[:full_name].none?, "border-red-400 focus:outline-red-600": customer.errors[:full_name].any?}] %>
+  </div>
+
+  <div>
+    <%= form.text_field :address, placeholder: "address", class: ["block shadow-sm rounded-md border bg-gray-700 px-3 py-2 mt-2 w-full", {"border-gray-600 focus:outline-blue-600": customer.errors[:address].none?, "border-red-400 focus:outline-red-600": customer.errors[:address].any?}] %>
+  </div>
+
+  <div>
+    <%= form.text_field :city, placeholder: "city", class: ["block shadow-sm rounded-md border bg-gray-700 px-3 py-2 mt-2 w-full", {"border-gray-600 focus:outline-blue-600": customer.errors[:city].none?, "border-red-400 focus:outline-red-600": customer.errors[:city].any?}] %>
+  </div>
+
+  <div>
+    <%= form.submit nil, class:"font-bold px-4 py-2 bg-blue-600 text-white rounded-md shadow-md hover:bg-blue-500 inline-flex items-center" %>
+  </div>
+<% end %>

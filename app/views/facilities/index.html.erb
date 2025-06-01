@@ -1,0 +1,312 @@
+<% content_for :title, "Facilities" %>
+<div class="w-full">
+  <!-- Header -->
+  <div class="p-6 bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+    <div class="w-full">
+      <!-- Breadcrumb -->
+      <nav class="flex mb-5" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center space-x-1 text-sm font-medium md:space-x-2">
+          <li class="inline-flex items-center">
+            <%= link_to "/", class: "inline-flex items-center text-gray-700 hover:text-blue-600 dark:text-gray-300 dark:hover:text-white" do %>
+              <svg class="w-5 h-5 mr-2.5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+              </svg>
+              Home
+            <% end %>
+          </li>
+          <li>
+            <div class="flex items-center">
+              <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+              <span class="ml-1 text-gray-400 md:ml-2 dark:text-gray-500" aria-current="page">Facilities</span>
+            </div>
+          </li>
+        </ol>
+      </nav>
+      <!-- Title and Actions -->
+      <div class="flex items-center justify-between">
+        <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Hotel Facilities</h1>
+        <button data-modal-target="facility-modal" data-modal-toggle="facility-modal" 
+                class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
+          </svg>
+          Add Facility
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Stats Cards -->
+  <div class="p-6 bg-gray-50 dark:bg-gray-900">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+      <!-- Total Facilities -->
+      <div class="bg-white rounded-lg shadow p-6 dark:bg-gray-800">
+        <div class="flex items-center">
+          <div class="p-3 rounded-full bg-blue-100 dark:bg-blue-900">
+            <svg class="w-6 h-6 text-blue-600 dark:text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Total Facilities</p>
+            <p class="text-2xl font-semibold text-gray-900 dark:text-white"><%= @facilities.respond_to?(:count) ? @facilities.count : Facility.count %></p>
+          </div>
+        </div>
+      </div>
+      <!-- Room Facilities -->
+      <div class="bg-white rounded-lg shadow p-6 dark:bg-gray-800">
+        <div class="flex items-center">
+          <div class="p-3 rounded-full bg-green-100 dark:bg-green-900">
+            <svg class="w-6 h-6 text-green-600 dark:text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z"></path>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Room Facilities</p>
+            <p class="text-2xl font-semibold text-gray-900 dark:text-white"><%= Facility.room_facilities.count %></p>
+          </div>
+        </div>
+      </div>
+      <!-- Hotel Amenities -->
+      <div class="bg-white rounded-lg shadow p-6 dark:bg-gray-800">
+        <div class="flex items-center">
+          <div class="p-3 rounded-full bg-purple-100 dark:bg-purple-900">
+            <svg class="w-6 h-6 text-purple-600 dark:text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Hotel Amenities</p>
+            <p class="text-2xl font-semibold text-gray-900 dark:text-white"><%= Facility.where.not(section_type: "room").count %></p>
+          </div>
+        </div>
+      </div>
+      <!-- Section Types -->
+      <div class="bg-white rounded-lg shadow p-6 dark:bg-gray-800">
+        <div class="flex items-center">
+          <div class="p-3 rounded-full bg-orange-100 dark:bg-orange-900">
+            <svg class="w-6 h-6 text-orange-600 dark:text-orange-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+            </svg>
+          </div>
+          <div class="ml-4">
+            <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Section Types</p>
+            <p class="text-2xl font-semibold text-gray-900 dark:text-white"><%= Facility.distinct.count(:section_type) %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Search and Filter -->
+    <div class="bg-white rounded-lg shadow p-6 mb-6 dark:bg-gray-800">
+      <%= search_form_for @q, local: true, html: { class: "space-y-4" } do |f| %>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <%= f.label :name_cont, "Search by name", class: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" %>
+            <%= f.search_field :name_cont, placeholder: "Enter facility name...", 
+                class: "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" %>
+          </div>
+          <div>
+            <%= f.label :section_type_eq, "Filter by section", class: "block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" %>
+            <%= f.select :section_type_eq, 
+                options_for_select([["All Sections", ""]] + Facility&.section_types.map { |key, value| [key.humanize, key] }, params.dig(:q, :section_type_eq)),
+                {}, 
+                { class: "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white" } %>
+          </div>
+          <div class="flex items-end space-x-2">
+            <%= f.submit "Search", class: "px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+            <%= link_to "Clear", facilities_path, class: "px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <!-- Facilities Grid -->
+    <% if @facilities.any? %>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <% @facilities.each do |facility| %>
+          <div class="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 dark:bg-gray-800">
+            <div class="p-6">
+              <!-- Header with section type badge -->
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white truncate"><%= facility.name %></h3>
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium <%= facility&.section_type_badge_color %>">
+                  <%= facility&.section_type&.humanize || "" %>
+                </span>
+              </div>
+              <!-- Quantity -->
+              <div class="mb-4">
+                <div class="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                  <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"></path>
+                  </svg>
+                  <span>Quantity: <span class="font-medium text-gray-900 dark:text-white"><%= facility.quantity %></span></span>
+                </div>
+              </div>
+              <!-- Room count (if it's a room facility) -->
+              <% if facility&.section_type == "room" && facility.rooms.any? %>
+                <div class="mb-4">
+                  <div class="flex items-center text-sm text-gray-600 dark:text-gray-300">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                    </svg>
+                    <span>Used in <span class="font-medium text-gray-900 dark:text-white"><%= facility.rooms.count %></span> rooms</span>
+                  </div>
+                </div>
+              <% end %>
+              <!-- Actions -->
+              <div class="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-gray-600">
+                <button data-modal-target="view-facility-modal-<%= facility.id %>" data-modal-toggle="view-facility-modal-<%= facility.id %>" 
+                        class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                  View Details
+                </button>
+                <div class="flex items-center space-x-2">
+                  <button data-modal-target="edit-facility-modal-<%= facility.id %>" data-modal-toggle="edit-facility-modal-<%= facility.id %>" 
+                          class="p-1 text-gray-400 hover:text-blue-600">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                    </svg>
+                  </button>
+                  <%= button_to facility, method: :delete, 
+                      data: { turbo_confirm: "Are you sure you want to delete this facility?" },
+                      form_class: "inline",
+                      class: "p-1 text-gray-400 hover:text-red-600" do %>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1-1H8a1 1 0 00-1 1v3M4 7h16"></path>
+                    </svg>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- View Facility Modal -->
+          <div id="view-facility-modal-<%= facility.id %>" tabindex="-1" aria-hidden="true" 
+               class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full bg-gray-900 bg-opacity-50">
+            <div class="relative w-full h-full max-w-2xl md:h-auto">
+              <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <div class="flex items-start justify-between p-6 border-b rounded-t dark:border-gray-600">
+                  <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    Facility Details
+                  </h3>
+                  <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" 
+                          data-modal-hide="view-facility-modal-<%= facility.id %>">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="p-6 space-y-4">
+                  <div>
+                    <label class="block text-sm font-medium text-gray-500 dark:text-gray-400">Name</label>
+                    <p class="mt-1 text-lg font-semibold text-gray-900 dark:text-white"><%= facility.name %></p>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-500 dark:text-gray-400">Section Type</label>
+                    <span class="mt-1 inline-flex items-center px-3 py-1 rounded-full text-sm font-medium <%= facility&.section_type_badge_color %>">
+                      <%= facility&.section_type&.humanize %>
+                    </span>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-500 dark:text-gray-400">Quantity</label>
+                    <p class="mt-1 text-lg font-semibold text-gray-900 dark:text-white"><%= facility&.quantity %></p>
+                  </div>
+                  <% if facility&.section_type == "room" && facility.rooms.any? %>
+                    <div>
+                      <label class="block text-sm font-medium text-gray-500 dark:text-gray-400">Associated Rooms</label>
+                      <div class="mt-2 flex flex-wrap gap-2">
+                        <% facility.rooms.limit(10).each do |room| %>
+                          <span class="px-2 py-1 bg-blue-100 text-blue-800 text-sm rounded-md">
+                            Room <%= room.room_number %>
+                          </span>
+                        <% end %>
+                        <% if facility.rooms.count > 10 %>
+                          <span class="px-2 py-1 bg-gray-100 text-gray-800 text-sm rounded-md">
+                            +<%= facility.rooms.count - 10 %> more
+                          </span>
+                        <% end %>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+                <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                  <button data-modal-hide="view-facility-modal-<%= facility.id %>" data-modal-target="edit-facility-modal-<%= facility.id %>" data-modal-toggle="edit-facility-modal-<%= facility.id %>" 
+                          class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Edit Facility
+                  </button>
+                  <button data-modal-hide="view-facility-modal-<%= facility.id %>" type="button" 
+                          class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Edit Facility Modal -->
+          <div id="edit-facility-modal-<%= facility.id %>" tabindex="-1" aria-hidden="true" 
+               class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full bg-gray-900 bg-opacity-50">
+            <div class="relative w-full h-full max-w-2xl md:h-auto">
+              <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <div class="flex items-start justify-between p-6 border-b rounded-t dark:border-gray-600">
+                  <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    Edit Facility
+                  </h3>
+                  <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" 
+                          data-modal-hide="edit-facility-modal-<%= facility.id %>">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div class="px-6 pb-6">
+                  <%= render 'form', facility: facility %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="bg-white rounded-lg shadow p-12 text-center dark:bg-gray-800">
+        <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+        </svg>
+        <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-white">No facilities found</h3>
+        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Get started by creating your first facility.</p>
+        <div class="mt-6">
+          <button data-modal-target="facility-modal" data-modal-toggle="facility-modal" 
+                  class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
+            </svg>
+            Add Facility
+          </button>
+        </div>
+      </div>
+    <% end %>
+    <!-- Pagination -->
+    <div class="mt-6">
+      <%= render 'shared/pagination', pagy: @pagy %>
+    </div>
+  </div>
+  <!-- Add Facility Modal -->
+  <div id="facility-modal" tabindex="-1" aria-hidden="true" 
+       class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full bg-gray-900 bg-opacity-50">
+    <div class="relative w-full h-full max-w-2xl md:h-auto">
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <div class="flex items-start justify-between p-6 border-b rounded-t dark:border-gray-600">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+            Add New Facility
+          </h3>
+          <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" 
+                  data-modal-hide="facility-modal">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+        <div class="px-6 pb-6">
+          <%= render 'form', facility: @facility_form %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

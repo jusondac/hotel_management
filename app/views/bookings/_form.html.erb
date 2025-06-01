@@ -1,0 +1,33 @@
+<%= form_with(model: booking, class: "contents text-white flex flex-col gap-5 mt-4" ) do |form| %>
+  <% if booking.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
+
+      <ul>
+        <% booking.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.text_field :customer_id, placeholder: "customer_id", class: ["block shadow-sm rounded-md border bg-gray-700 px-3 py-2 mt-2 w-full", {"border-gray-600 focus:outline-blue-600": booking.errors[:customer_id].none?, "border-red-400 focus:outline-red-600": booking.errors[:customer_id].any?}] %>
+  </div>
+
+  <div>
+    <%= form.date_field :start_date, placeholder: "start_date", class: ["block shadow-sm rounded-md border bg-gray-700 px-3 py-2 mt-2 w-full", {"border-gray-600 focus:outline-blue-600": booking.errors[:start_date].none?, "border-red-400 focus:outline-red-600": booking.errors[:start_date].any?}] %>
+  </div>
+
+  <div>
+    <%= form.date_field :finish_date, placeholder: "finish_date", class: ["block shadow-sm rounded-md border bg-gray-700 px-3 py-2 mt-2 w-full", {"border-gray-600 focus:outline-blue-600": booking.errors[:finish_date].none?, "border-red-400 focus:outline-red-600": booking.errors[:finish_date].any?}] %>
+  </div>
+
+  <div>
+    <%= form.number_field :payment_method, placeholder: "payment_method", class: ["block shadow-sm rounded-md border bg-gray-700 px-3 py-2 mt-2 w-full", {"border-gray-600 focus:outline-blue-600": booking.errors[:payment_method].none?, "border-red-400 focus:outline-red-600": booking.errors[:payment_method].any?}] %>
+  </div>
+
+  <div>
+    <%= form.submit nil, class:"font-bold px-4 py-2 bg-blue-600 text-white rounded-md shadow-md hover:bg-blue-500 inline-flex items-center" %>
+  </div>
+<% end %>

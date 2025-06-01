@@ -66,3 +66,5 @@ end
 
 gem "pagy", "~> 9.3"
 gem "ransack", "~> 4.3"
+
+gem "awesome_print", "~> 1.9"
